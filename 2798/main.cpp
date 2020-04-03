@@ -22,5 +22,6 @@ int main(void){
         }
     }
     cout << ans;
+    delete(array);
     return 0;
 }
