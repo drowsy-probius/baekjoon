@@ -6,7 +6,7 @@ int main(void){
     int* array;
 
     cin >> num >> max;
-    array = new int(num);
+    array = new int[num];
 
     for(i=0; i<num; i++){
         cin >> array[i];
@@ -22,6 +22,6 @@ int main(void){
         }
     }
     cout << ans;
-    delete(array);
+    delete[] array;
     return 0;
 }
