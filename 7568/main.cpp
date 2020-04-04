@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
@@ -9,24 +10,27 @@ int main(void){
 
     cin >> size;
     
-    array = (int**)new int[size];
+    array = (int**)new int*[size];
     ans = new int[size];
-    for(i=0;i<size;i++) ans[i]=size;
+    for(i=0;i<size;i++) ans[i]=1;
 
     for(i=0;i<size;i++){
         array[i] = (int*)new int[2];
-        cin >> array[i][0] >> array[i][0];
+        memset(array[i], 0, sizeof(int)*2); // initialize memory space to 0
+        cin >> array[i][0] >> array[i][1];
     }
 
-    for(i=0; i<size-1; i++){
-        for(j=i; j<size; j++){
-            if(array[i][0]>array[j][0] && array[i][1]>array[j][1]){
-                ans[i]--;
+    for(i=0; i<size; i++){
+        for(j=0; j<size; j++){
+            if( i!=j && array[j][0]>array[i][0] && array[j][1]>array[i][1]){
+                ans[i]++;
             }
         }
     }
 
-    for(i=0;i<size;i++) cout << ans[i] << " ";
+    for(i=0; i<size; i++){
+        cout << ans[i] << " ";
+    }
     
     for(i=0;i<size;i++) delete[] array[i];
     delete[] array;
@@ -35,8 +39,12 @@ int main(void){
 }
 
 /*
-p1: a1, b1
-p2: a2, b2
+p1  1
+p2  1
+p3  1
 
-if(a1>a2 && b1>b2) then p1>p2
+if p2>p1 then p1++
+if p3>p1 then p1++
+
+
 */
