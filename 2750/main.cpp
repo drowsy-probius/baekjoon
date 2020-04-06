@@ -41,23 +41,3 @@ int main(void){
 
     return 0;
 }
-
-/* O(n^2)
-insertion sort
-5 2 3 1
-
-5 | 2 3 1
-
-2 3 1
-5 |
-
-3 1
-2 5 |
-
-
-selection sort
-
-
-bubble sort
-
-*/
