@@ -4,7 +4,7 @@ using namespace std;
 int main(void){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-    cout.tie(NULL);                 // 위에 세개 추가하니까 속도 빨라짐  ???
+    cout.tie(NULL);                 // 위에 세개 추가하니까 속도 빨라짐  ./???
 
     int size=0;
     short max=0;
