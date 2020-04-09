@@ -11,7 +11,6 @@ int main(void){
     int size=0, ans=0;
     cin >> size;
     vector<int> arr(size);
-    vector<int> freq(8001, 0);  // 8001 elements initialized as zero
 
     //mean
     for(int i=0; i<size; i++) {cin >> arr[i]; ans += arr[i];}
@@ -24,12 +23,7 @@ int main(void){
     cout << "\n";
 
     // mode
-    // -4000 ~ -1 : 4001 to 8000 :: +8001
-    for(int i=0; i<size; i++){
-        short temp = i<0 ? i+8001 : i;
-        freq[arr[i]]++;
-    }
-    sort(freq.begin(), freq.end(), [](int a, int b){return a<b;});
+
     
 
     
