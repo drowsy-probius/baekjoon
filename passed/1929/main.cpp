@@ -3,14 +3,12 @@
 using namespace std;
 bool check[MAX] = {false, };
 int main(void){
-    ios::sync_with_stdio(false);
     int M, N;
-    cin >> M >> N;
+    scanf("%d %d", &M, &N);
 
     for(int i=2; i*i<=N; i++){
         if(!check[i]){
-            int j=2;
-            for(int k=j*i; k<=N; k = (++j)*i ){ 
+            for(int k=i+i; k<=N; k+=i ){ 
                 check[k] = true;
             }
         }
@@ -20,7 +18,7 @@ int main(void){
 
 
     while(M <= N){
-        if(!check[M]) cout << M << endl;
+        if(!check[M]) printf("%d\n", M);
 
         M++;
     }
