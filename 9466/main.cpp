@@ -1,14 +1,6 @@
 #include <iostream>
+#include <queue>
 using namespace std;
-int find(int graph[], int root, int key, int size){
-    while(size--){
-        if(root == key){
-            return root;
-        }
-        root = graph[root];
-    }
-    return -1;
-}
 int main(void)
 {
     int T;
@@ -16,48 +8,54 @@ int main(void)
     while (T--)
     {
         int stud, answer = 0;
+        queue<int> q;
         cin >> stud;
         int graph[stud + 1] = {
+            0,
+        };
+        int degree[stud + 1] = {
             0,
         };
         bool isvisited[stud + 1] = {
             false,
         };
-        answer = stud;
 
         for (int i = 1; i <= stud; i++)
         {
-            cin >> graph[i];
+            int k;
+            cin >> k;
+
+            graph[i] = k;
+            degree[k]++;
         }
 
         for (int i = 1; i <= stud; i++)
         {
-            if( isvisited[i] == false ){
+            if (degree[i] == 0)
+            {
+                q.push(i);
                 isvisited[i] = true;
-                
-                int cycleroot, cnt=1;
-                int next = graph[i];
-                if(i == next){
-                    answer--;
-                    continue;
-                }
+            }
+        }
 
-                while ( ( cycleroot = find(graph, i, next, cnt++) ) == -1 )
-                {
-                    if(isvisited[next]){
-                        cycleroot = 0;
-                        break;
-                    }
-                    next = graph[next];
-                }
-                if(cycleroot == 0){
-                    continue;
-                }
-                do{
-                    isvisited[cycleroot] = true;
-                    cycleroot = graph[cycleroot];
-                    answer--;
-                } while (cycleroot != next && isvisited[cycleroot] == false);
+        while (!q.empty())
+        {
+            int k = q.front();
+            q.pop();
+
+            if (!isvisited[graph[k]])
+            {
+                degree[graph[k]]--;
+                isvisited[graph[k]] = true;
+                q.push(graph[k]);
+            }
+        }
+
+        for (int i = 1; i <= stud; i++)
+        {
+            if (degree[i] == 0)
+            {
+                answer++;
             }
         }
 
@@ -135,4 +133,12 @@ output : 8
 1 6
 2 1 1 2 6 3
 output : 4
+
+1 6
+2 3 4 2 3 3
+3
+
+1 6
+2 3 1 1 2 3
+3
 */
