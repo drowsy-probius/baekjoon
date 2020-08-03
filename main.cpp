@@ -1,104 +1,38 @@
 #include <iostream>
-
-#include <vector>
-
-#include <algorithm>
-
-#include <cstring> //memset
-
 using namespace std;
 
-const int MAX = 100000 + 1;
-
-int V;
-
-bool visited[MAX];
-
-vector<pair<int, int>> graph[MAX];
-
-int diameter = 0;
-
-int farthestNode = 0;
-
-void DFS(int node, int cost)
-
+void quick(int *arr, int arr_start, int arr_end)
 {
+    if(arr_start >= arr_end - 1) return;
 
-    //기저 사례: 이미 방문한 곳
-
-    if (visited[node])
-
-        return;
-
-    visited[node] = true;
-
-    //지름 업데이트
-
-    if (diameter < cost)
-
+    int i = arr_start - 1;
+    int pivot = arr[arr_end - 1];
+    for(int j=arr_start; j < arr_end - 1; j++)
     {
-
-        diameter = cost;
-
-        farthestNode = node;
-    }
-
-    for (int i = 0; i < graph[node].size(); i++)
-
-        DFS(graph[node][i].first, cost + graph[node][i].second);
-}
-
-int main(void)
-
-{
-
-    ios_base::sync_with_stdio(0);
-
-    cin.tie(0); //cin 실행속도 향상
-
-    cin >> V;
-
-    for (int i = 0; i < V; i++)
-
-    {
-
-        int node;
-
-        cin >> node;
-
-        while (1)
-
+        if( arr[j] < pivot )
         {
-
-            int node2, cost;
-
-            cin >> node2;
-
-            if (node2 == -1)
-
-                break;
-
-            cin >> cost;
-
-            graph[node].push_back({node2, cost});
+            i++;
+            auto t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
         }
     }
+    i++;
+    auto t = arr[i];
+    arr[i] = arr[arr_end - 1];
+    arr[arr_end - 1] = t;
 
-    memset(visited, false, sizeof(visited));
+    quick(arr, arr_start, i);
+    quick(arr, i + 1, arr_end);
+}
 
-    //루트에서 가장 먼 정점 찾고
 
-    DFS(1, 0);
-
-    //해당 정점에서 가장 먼 정점까지의 거리가 트리 지름의 정해
-
-    memset(visited, false, sizeof(visited));
-
-    diameter = 0;
-
-    DFS(farthestNode, 0);
-
-    cout << diameter << "\n";
-
-    return 0;
+int main(void){
+    int arr[10] = {0, 23, 1, -42, 3, 
+                    9, 12, 33, 2, -9};
+    
+    quick(arr, 0, 10);
+    for(int i=0; i<10; i++){
+        cout << arr[i] << " ";
+    }
 }
