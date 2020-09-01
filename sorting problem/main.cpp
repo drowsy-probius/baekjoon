@@ -24,13 +24,44 @@ void quick(int *a, int low, int high){
     quick(a, idx+1, high);
 }
 
-void merge(int &a){
+void merge(int *a, int low, int middle, int high){
+    int tmp[high-low] = {0,};
+    int i = low, j = middle, global_i = 0;
+
+    while(i<middle && j<high){
+        if(a[i] < a[j]){
+            tmp[global_i++] = a[i++];
+        }else{
+            tmp[global_i++] = a[j++];
+        }
+    }
+
+    while(i<middle){
+        tmp[global_i++] = a[i++];
+    }
+
+    while(j<high){
+        tmp[global_i++] = a[j++];
+    }
+    
+    global_i = 0;
+    for(int i=low; i<high; i++){
+        a[i] = tmp[global_i++];
+    }
 
 }
 
-void bubble(int &a){
+void merge_sort(int *a, int low, int high){
+    if(high-low <= 1){
+        return;
+    }
 
+    int middle = (low + high)/2;
+    merge_sort(a, low, middle);
+    merge_sort(a, middle, high);
+    merge(a, low, middle, high);
 }
+
 
 int main(void){
     double start = clock();
@@ -38,7 +69,7 @@ int main(void){
     int array[15] = {1, 5, 6, 2, 3, 12, 5, 0, 9, 54, 34, 6, 7, 28, 99};
     
     print(array, 15);
-    quick(array, 0, 14);
+    merge_sort(array, 0, 15);
     print(array, 15);
     
     cout << (double)(clock()-start) << "ms" << endl;

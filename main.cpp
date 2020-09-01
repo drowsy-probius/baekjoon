@@ -1,38 +1,33 @@
 #include <iostream>
 using namespace std;
+long long int swapped = 0;
 
-void quick(int *arr, int arr_start, int arr_end)
-{
-    if(arr_start >= arr_end - 1) return;
-
-    int i = arr_start - 1;
-    int pivot = arr[arr_end - 1];
-    for(int j=arr_start; j < arr_end - 1; j++)
-    {
-        if( arr[j] < pivot )
-        {
-            i++;
-            auto t = arr[i];
-            arr[i] = arr[j];
-            arr[j] = t;
+void bubble(int *a, int low, int high){
+    for(int i=high-1; i>=0; i--){
+        for(int j=low; j<i; j++){
+            if(a[j] > a[j+1]){
+                swapped++;
+                int tmp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = tmp;
+            }
         }
     }
-    i++;
-    auto t = arr[i];
-    arr[i] = arr[arr_end - 1];
-    arr[arr_end - 1] = t;
-
-    quick(arr, arr_start, i);
-    quick(arr, i + 1, arr_end);
 }
 
 
 int main(void){
-    int arr[10] = {0, 23, 1, -42, 3, 
-                    9, 12, 33, 2, -9};
-    
-    quick(arr, 0, 10);
-    for(int i=0; i<10; i++){
-        cout << arr[i] << " ";
+    long long int n;
+    cin >> n;
+    int arr[n] = {0, };
+    for(int i=0; i<n; i++){
+        cin >> arr[i];
     }
+    
+    bubble(arr, 0, n);
+    cout << swapped << '\n';
+
+    // for(int i=0; i<n; i++){
+    //     cout << arr[i] << ' ';
+    // }
 }
