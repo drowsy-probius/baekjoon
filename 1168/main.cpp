@@ -1,33 +1,30 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+
+
+
 int main(void)
 {
-    int n, k, it, size;
-    vector<int> yosef;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr); cout.tie(nullptr);
+
+    int n, k;
+    int idx = 0;
     cin >> n >> k;
-    yosef.reserve(n);
-    it = k - 1;
-    size = n;
-    for (int i = 0; i < n; i++)
-    {
-        yosef.push_back(i + 1);
+    int sum[n];
+
+    for(int i=0; i<n; i++){
+        sum[i] = n;
     }
 
-    cout << "<";
-    for (int i = 0; i < n-1; i++)
-    {
-        cout << yosef.at(it) << ", ";
-        yosef.erase(yosef.begin() + it);
-
-        it += k - 1;
-        if (it >= --size)
-        {
-            it %= size;
-        }
+    idx = k - 1;
+    for(int i=n-1; i>=0; i--)
+    {   
+        
     }
 
-    cout << yosef.at(0) << ">\n";
+
 
     return 0;
 }
