@@ -9,7 +9,8 @@
         "string_view": "cpp",
         "initializer_list": "cpp",
         "utility": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "hash_map": "cpp"
     },
     
     "code-runner.executorMap": { 
