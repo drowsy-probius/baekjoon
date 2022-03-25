@@ -1,7 +1,7 @@
 #!/bin/bash
 
-MESSAGE_ARRAY=("8^8" ">_<" "*^*" "T^T")
-LENGTH=4
+MESSAGE_ARRAY=("8^8" ">_<" "*^*" "T^T" "OwO" "*3*")
+LENGTH=6
 INDEX="$RANDOM % $LENGTH"
 
 git config --global credential.helper store
